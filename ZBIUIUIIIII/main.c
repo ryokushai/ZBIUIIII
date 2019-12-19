@@ -19,6 +19,6 @@ int	main()
 	
 	//printf("%d\n",ft_printf("ca%----4c%1c va %10c%-c ??\n",'\0','\n',(char)564,0));
 	//printf("%p\n", (void *)UINT64_MAX);
-	printf("%2.10s\n", NULL);
-	ft_printf("%2.10s", NULL);
+	printf("%15.7d\n", -100);
+	ft_printf("%15.7d", -100);
 }	

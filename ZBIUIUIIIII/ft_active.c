@@ -22,8 +22,8 @@ void	ft_active_all_1(char *conv, char **stock, int len, int i)
 		if (*stock[0] == '-')
 		{
 			*stock = ft_delete_minus(*stock);
-			ft_putchar('-');
-			memset(add, '0', len);
+			memset(add, '0', len );
+			add = ft_stock("-", add);
 			*stock = ft_stock(add, *stock);
 		}
 		else
@@ -55,8 +55,8 @@ void	ft_active_all_1(char *conv, char **stock, int len, int i)
 		if (*stock[0] == '-')
 		{
 			*stock = ft_delete_minus(*stock);
-			ft_putchar('-');
 			memset(add, '0', len + 1);
+			add = ft_stock("-", add);
 			*stock = ft_stock(add, *stock);
 		}
 		else
