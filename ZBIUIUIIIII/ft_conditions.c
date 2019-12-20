@@ -21,7 +21,7 @@ char	*ft_conditions(char *str)
 
 	count = 0;
 	ktr = strdup(str);
-	tab = "cspiduxX";
+	tab = "cspidu%xX";
 	while (*ktr)
 	{
 		if (!(strchr(tab,*ktr)))

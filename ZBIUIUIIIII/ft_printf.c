@@ -22,7 +22,6 @@ int		ft_printf(char *format, ...)
 	char	*conv;
 	int 	num;
 	char	*stock;
-	//from here
 	int		e;
 	int 	count;
 	int		z;
@@ -85,9 +84,17 @@ int		ft_printf(char *format, ...)
 				conv2[j++] = etoile[e][z++];
 			}
 			e++;
-			i++;
+			if (conv[i])
+				i++;
 		}
 		conv2[j] = '\0';
+		if (*str == '%')
+		{
+			stock = malloc(2);
+			stock[0] = '%';
+			stock[1] = '\0';
+			ft_active_char(stock,conv2);
+		}
 		if (*str == 'c')
 		{
 			stock = ft_char(va_arg(arg, int));

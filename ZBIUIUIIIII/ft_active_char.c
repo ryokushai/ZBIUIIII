@@ -27,13 +27,17 @@ void	ft_active_all_1_char(char *conv, char **stock, int len, int i)
 	
 	else if (ft_isdigit(conv[i]))
 	{
-		ft_putstr_write(memset(add, ' ', len));
+		memset(add, ' ', len);
+		add[len] = '\0';
+		ft_putstr_write(add);
 		ft_putchar(**stock);
 	}
 	if (conv[i] == '-')
 	{
-		ft_putchar(**stock);		
-		ft_putstr_write(memset(add, ' ', len));
+		ft_putchar(**stock);
+		memset(add, ' ', len);
+		add[len] = '\0';
+		ft_putstr_write(add);
 	}
 	if (conv[i] == '.')
 	{
@@ -80,6 +84,7 @@ void	ft_active_char(char *stock, char *conv)
 	{
 		if (ft_isdigit(conv[i]))
 		{
+			
 			checkpoint = 1;
 			if (number == NULL)
 			{
@@ -87,16 +92,18 @@ void	ft_active_char(char *stock, char *conv)
 			}
 			number[count] = conv[i];	
 			count++;
+		
 			if (i == 0 && conv[i] != '0')
 			{
+				number[count] = '\0';
 				count = 0;	
 				number = ft_strrev(number);
 				ft_active_all_char(conv, &stock, &number, i);	
-				conv[count] = '\0';
 			}
 		}
 		if (conv[i] == '-' && number)
 		{
+			number[count] = '\0';
 			checkpoint = 1;
 			count = 0;
 			number = ft_strrev(number);
@@ -104,27 +111,14 @@ void	ft_active_char(char *stock, char *conv)
 		}
 		if (conv[i] == '.')
 		{
-			checkpoint = 1;
-			if (( number == NULL || atoi(number) == 0 )&& atoi(stock) == 0)
-			{
-				if (number == NULL)
-				{
-					number = malloc(1);
-					number[0] = '0';
-					number[1] = '\0';
-				}
-				count = 0;
-			}
-			len_number = atoi(number);
-			len_stock = ft_strlen(stock);
-			ft_active_all_char(conv,&stock, &number, i);	
+			checkpoint = 0;
 		}
 		if (conv[i] == '0' && number && i == 0)
 		{
 			count = 0;
 			number = ft_strrev(number);
 			ft_active_all_char(conv, &stock, &number, i);
-	checkpoint = 1;
+			checkpoint = 1;
 		}
 		i--;
 	}	

@@ -104,12 +104,13 @@ void 	ft_active(char *stock, char *conv)
 	int		i;
 	char 	*number;
 	int		count;
-
+	char 	*xtr;
 	i = ft_strlen(conv);
 	number = NULL;
 	count = 0;
 	i--;
-	if (strchr(conv, '.') && conv[0] == '0')
+	xtr = strchr(conv,'.');
+	if (xtr && conv[0] == '0' && xtr[1] != '-')
 		conv = ft_delete_zero(conv);
 	while (i >= 0)
 	{
@@ -132,12 +133,25 @@ void 	ft_active(char *stock, char *conv)
 		}
 		if (conv[i] == '-' && number)
 		{
+			number[count] = '\0';
 			count = 0;
+			if(ft_skip_minus(conv,i))
+			{
 			number = ft_strrev(number);
 			ft_active_all(conv, &stock, &number, i);
+			}
+			else
+			{
+				number = NULL;
+				free(number);	
+			}
 		}
 		if (conv[i] == '.')
 		{
+			//printf("ooo%d",count);
+			if (number)
+				number[count] = '\0';
+			//printf("%d\n", count);
 			if (( number == NULL || atoi(number) == 0 )&& atoi(stock) == 0)
 			{
 				if (number == NULL)
@@ -152,6 +166,7 @@ void 	ft_active(char *stock, char *conv)
 			else if(number)
 			{
 				count = 0;
+				//printf("zii %s\n", number);
 				number = ft_strrev(number);
 				ft_active_all(conv, &stock, &number, i);
 			}
@@ -162,10 +177,8 @@ void 	ft_active(char *stock, char *conv)
 		number = ft_strrev(number);
 		number = ft_delete_zero(number);
 		ft_active_all(conv, &stock, &number, i);		
-		}
-			
+		}	
 		i--;
 	}
-
 	ft_putstr_write(stock);
 }
