@@ -6,7 +6,7 @@
 /*   By: haboussi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 14:55:34 by haboussi          #+#    #+#             */
-/*   Updated: 2019/12/19 07:00:58 by haboussi         ###   ########.fr       */
+/*   Updated: 2019/12/20 08:33:02 by haboussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@ char 	*add;
 int 	len_number;
 int		len_stock;
 
+int		ft_skip_minus(char *conv, int i)
+{
+	while (i >= 0)
+	{
+		if (conv[i] != '-')
+		{
+			return (0);
+		}
+		i--;
+	}
+	return (1);
+}
 void	ft_active_all_1_string(char *conv, char **stock, int len, int i)
 {
 	if (conv[i] == '0')
@@ -113,14 +125,14 @@ void	ft_active_string(char *stock, char *conv)
 				ft_active_all_string(conv, &stock, &number, i);	
 			}
 		}
-		if (conv[i] == '-' && number)
+		if (conv[i] == '-' && number && ft_skip_minus(conv, i))
 		{
 			number[count] = '\0';
 			count = 0;
 			number = ft_strrev(number);
 			ft_active_all_string(conv, &stock, &number, i);
 		}
-		if (conv[i] == '.')
+		if (conv[i] == '.' && conv[i + 1] != '-')
 		{
 			if (( number == NULL || atoi(number) == 0 )&& atoi(stock) == 0)
 			{
@@ -136,6 +148,7 @@ void	ft_active_string(char *stock, char *conv)
 			len_number = atoi(number);
 			len_stock = ft_strlen(stock);
 			ft_active_all_string(conv,&stock, &number, i);	
+			
 		}
 		if (conv[i] == '0' && number && i == 0)
 		{

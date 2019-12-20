@@ -6,7 +6,7 @@
 /*   By: haboussi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 13:19:10 by haboussi          #+#    #+#             */
-/*   Updated: 2019/12/14 11:53:09 by haboussi         ###   ########.fr       */
+/*   Updated: 2019/12/20 08:19:02 by haboussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdarg.h>
 
 
-
+int		ft_skip_minus(char *conv, int i);
 char	*ft_flags(char *str);
 char    *ft_char(char s);
 int 	ft_printf(char *format, ...);

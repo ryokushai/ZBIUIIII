@@ -6,7 +6,7 @@
 /*   By: haboussi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 14:08:57 by haboussi          #+#    #+#             */
-/*   Updated: 2019/12/19 06:41:51 by haboussi         ###   ########.fr       */
+/*   Updated: 2019/12/20 08:45:02 by haboussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ int	main()
 	
 	//printf("%d\n",ft_printf("ca%----4c%1c va %10c%-c ??\n",'\0','\n',(char)564,0));
 	//printf("%p\n", (void *)UINT64_MAX);
-	printf("%15.7d\n", -100);
-	ft_printf("%15.7d", -100);
+	//printf("%15.7d\n", -100);
+	ft_printf("%*s%*d%*c",3, "hello",2,10,1,'g');
 }	
