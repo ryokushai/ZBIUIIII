@@ -20,5 +20,5 @@ int	main()
 	//printf("%d\n",ft_printf("ca%----4c%1c va %10c%-c ??\n",'\0','\n',(char)564,0));
 	//printf("%p\n", (void *)UINT64_MAX);
 	//printf("%15.7d\n", -100);
-	ft_printf("%*s%*d%*c",3, "hello",2,10,1,'g');
+	ft_printf("%*s %*d %*c",3, "hello",2,10,1,'g');
 }	

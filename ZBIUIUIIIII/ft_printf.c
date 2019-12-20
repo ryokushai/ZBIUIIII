@@ -26,17 +26,19 @@ int		ft_printf(char *format, ...)
 	int		e;
 	int 	count;
 	int		z;
-	int		len = 0;
+	int		j;
 	char	**etoile;
 	char	*conv2;
-	int		j = 0;
+	int		len;
+	len = 0;
 
-
-	i = 0;
+	
 	va_start(arg, format);
 	str = format;
 	while (*str != '\0')
 	{
+		j = 0;
+		i = 0;
 		count = 0;
 		while (*str != '%')
 		{

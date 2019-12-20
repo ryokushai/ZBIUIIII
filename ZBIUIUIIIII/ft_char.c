@@ -15,7 +15,7 @@
 char *ft_char(char s)
 {
     char *str;
-    str = malloc(1);
+    str = malloc(2);
     if (s == '\0')
     {
         *str = '\0';
