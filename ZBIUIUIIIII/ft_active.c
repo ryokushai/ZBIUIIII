@@ -73,7 +73,7 @@ void	ft_active_all(char	*conv, char **stock,char **number, int i)
 
 	//char    *add;
 	
-	if (atoi(*number) == 0 && atoi(*stock) == 0)
+	if (atoi(*number) == 0 && atoi(*stock) == 0 && ft_check_zero(*stock))
 	{
 		*stock = "";
 		//printf("%s", *stock);
@@ -110,11 +110,19 @@ void 	ft_active(char *stock, char *conv)
 	count = 0;
 	i--;
 	xtr = strchr(conv,'.');
-	if (xtr && conv[0] == '0' && xtr[1] != '-')
+	if ((xtr && conv[0] == '0' && xtr[1] != '-') || (conv[0] == '0' && conv[1] == '-'))
 		conv = ft_delete_zero(conv);
 	while (i >= 0)
 	{
-		if (ft_isdigit(conv[i]))
+		if (conv[i] == '0' && number && i == 0)
+		{
+		number[count] = '\0';			
+		count = 0;
+		number = ft_strrev(number);
+		//number = ft_delete_zero(number);
+		ft_active_all(conv, &stock, &number, i);		
+		}	
+		else if (ft_isdigit(conv[i]))
 		{
 			if (number == NULL)
 			{
@@ -148,36 +156,35 @@ void 	ft_active(char *stock, char *conv)
 		}
 		if (conv[i] == '.')
 		{
-			//printf("ooo%d",count);
-			if (number)
-				number[count] = '\0';
-			//printf("%d\n", count);
-			if (( number == NULL || atoi(number) == 0 )&& atoi(stock) == 0)
+			if (conv[i + 1] == '-' && *stock == '0')
 			{
-				if (number == NULL)
-				{
-					number = malloc(1);
-					number[0] = '0';
-					number[1] = '\0';
-				}
-				count = 0;
-				ft_active_all(conv, &stock, &number, i);
+				*stock = '0';
 			}
-			else if(number)
+			else
 			{
-				count = 0;
-				//printf("zii %s\n", number);
-				number = ft_strrev(number);
-				ft_active_all(conv, &stock, &number, i);
+				if (number)
+				{
+					number[count] = '\0';
+				}
+				if (( number == NULL || atoi(number) == 0 )&& ft_check_zero(stock))
+				{
+					if (number == NULL)
+					{
+						number = malloc(1);
+						number[0] = '0';
+						number[1] = '\0';
+					}
+					count = 0;
+					ft_active_all(conv, &stock, &number, i);
+				}
+				else if(number)
+				{
+					count = 0;
+					number = ft_strrev(number);
+					ft_active_all(conv, &stock, &number, i);
+				}
 			}
 		}
-		if (conv[i] == '0' && number && i == 0)
-		{			
-		count = 0;
-		number = ft_strrev(number);
-		number = ft_delete_zero(number);
-		ft_active_all(conv, &stock, &number, i);		
-		}	
 		i--;
 	}
 	ft_putstr_write(stock);

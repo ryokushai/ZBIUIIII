@@ -27,6 +27,7 @@ char	*ft_delete_zero(char *conv)
 	{
 		result[j++] = conv[i++];
 	}
+	result[j] = '\0';
 	return (result);
 }
 

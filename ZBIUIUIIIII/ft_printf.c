@@ -117,12 +117,12 @@ int		ft_printf(char *format, ...)
 		}
 		if (*str == 'x')
 		{
-			stock = ft_itohexa(va_arg(arg, unsigned long long));
+			stock = ft_itohexa(va_arg(arg, unsigned int));
 			ft_active(stock, conv2);
 		}
 		if (*str == 'X')
 		{
-			stock = ft_itohexa2(va_arg(arg, unsigned long long));
+			stock = ft_itohexa2(va_arg(arg, unsigned int));
 			ft_active(stock, conv2);
 		}
 		if (*str == 'p')

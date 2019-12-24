@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-char	*ft_itohexa2(unsigned long long  n)
+char	*ft_itohexa2(unsigned int  n)
 {
-	unsigned long long 	f;
+	unsigned int 	f;
 	int				len;
 	char			*dest;
 	char			*tab;
