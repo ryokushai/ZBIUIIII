@@ -17,6 +17,10 @@ int    ft_check_zero(char *stock)
     int i;
 
     i = 0;
+    if (stock[0] == '0' && stock[1] == 'x' && stock[2] == '0' && stock[3] == '\0')
+    {
+        return 2;
+    }           
     while(stock[i])
     {
        if (ft_isdigit(stock[i]))
@@ -29,12 +33,8 @@ int    ft_check_zero(char *stock)
        }
     }
     if (atoi(stock) == 0)
-    {
         return 1;
-    }
     else
-    {
         return 0;
-    }
     return 0;
 }

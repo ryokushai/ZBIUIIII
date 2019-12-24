@@ -22,7 +22,7 @@ void	ft_active_all_1_char(char *conv, char **stock, int len, int i)
 	if (conv[i] == '0')
 	{
 		memset(add, '0', len);
-		*stock= ft_stock(add, *stock);
+		*stock = ft_stock(add, *stock);
 	}
 	
 	else if (ft_isdigit(conv[i]))
@@ -59,7 +59,7 @@ void	ft_active_all_char(char	*conv, char **stock,char **number, int i)
 	*number = NULL;
 	if (len <= 0 )
 	{
-		ft_putstr_write(*stock);
+		ft_putchar(**stock);
 		return ;
 	}	
 	add = malloc(len + 1);

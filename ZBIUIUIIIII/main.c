@@ -20,8 +20,8 @@ int	main()
 	//printf("%d\n",ft_printf("ca%----4c%1c va %10c%-c ??\n",'\0','\n',(char)564,0));
 	//printf("%p\n", (void *)UINT64_MAX);
 	//ft_printf("hello ca%----4c %1c va %13c%-c ??", '\0', '\n', (char)564, 0);
-	printf("%0*d", -5, 1);
-	ft_printf("%0*d", -5, 1);
+	//printf("%2.c\n", 0);
+	ft_printf("%1.c", 0);
 	//ft_printf("%.3%l");
 	//ft_printf("%*s %*d %*c",3, "hello",2,10,1,'g');
 }	

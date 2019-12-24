@@ -70,13 +70,20 @@ void	ft_active_all_1(char *conv, char **stock, int len, int i)
 void	ft_active_all(char	*conv, char **stock,char **number, int i)
 {
 	int		len;
+	int 	j;
 
 	//char    *add;
 	
-	if (atoi(*number) == 0 && atoi(*stock) == 0 && ft_check_zero(*stock))
+	if (atoi(*number) == 0 && atoi(*stock) == 0 && (j = ft_check_zero(*stock)))
 	{
-		*stock = "";
-		//printf("%s", *stock);
+		if (j == 2)
+		{
+			(*stock)[2] = '\0';
+		}
+		else
+		{
+			*stock = "";
+		}
 		free(*number);
 		*number = NULL;
 		return ;
@@ -166,7 +173,7 @@ void 	ft_active(char *stock, char *conv)
 				{
 					number[count] = '\0';
 				}
-				if (( number == NULL || atoi(number) == 0 )&& ft_check_zero(stock))
+				if (( number == NULL || atoi(number) == 0 ) && ft_check_zero(stock))
 				{
 					if (number == NULL)
 					{
