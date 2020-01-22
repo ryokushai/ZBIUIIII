@@ -93,7 +93,7 @@ int		ft_printf(char *format, ...)
 			stock = malloc(2);
 			stock[0] = '%';
 			stock[1] = '\0';
-			ft_active_char(stock,conv2);
+			ft_active_pour(stock,conv2);
 		}
 		if (*str == 'c')
 		{
@@ -141,3 +141,4 @@ int		ft_printf(char *format, ...)
 	return g_printf;
 	va_end(arg);
 }
+

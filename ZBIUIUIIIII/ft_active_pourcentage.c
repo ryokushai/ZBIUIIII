@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_active_char.c                                   :+:      :+:    :+:   */
+/*   ft_active_pourcentage.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haboussi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/16 19:31:30 by haboussi          #+#    #+#             */
-/*   Updated: 2019/12/16 19:31:31 by haboussi         ###   ########.fr       */
+/*   Created: 2020/01/17 18:24:41 by haboussi          #+#    #+#             */
+/*   Updated: 2020/01/17 18:24:44 by haboussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ft_printf.h"
 
@@ -17,12 +16,14 @@ char 	*add;
 int 	len_number;
 int		len_stock;
 
-void	ft_active_all_1_char(char *conv, char **stock, int len, int i)
+void	ft_active_all_1_pour(char *conv, char **stock, int len, int i)
 {
 	if (conv[i] == '0')
 	{
 		memset(add, '0', len);
-		*stock = ft_stock(add, *stock);
+		add[len] = '\0';
+		ft_putstr_write(add);
+		ft_putchar(**stock);
 	}
 	
 	else if (ft_isdigit(conv[i]))
@@ -38,23 +39,17 @@ void	ft_active_all_1_char(char *conv, char **stock, int len, int i)
 		memset(add, ' ', len);
 		add[len] = '\0';
 		ft_putstr_write(add);
-	}
-	if (conv[i] == '.')
-	{
 		ft_putchar(**stock);
 	}
 }
 
-void	ft_active_all_char(char	*conv, char **stock,char **number, int i)
+void	ft_active_all_pour(char	*conv, char **stock,char **number, int i)
 {
 	int		len;
 
-	if (**stock == '\0')
-		len = atoi(*number) - 1;
-	else
-		len = atoi(*number) - ft_strlen(*stock);
+	len = atoi(*number) - 1;
     len_number = atoi(*number);
-	len_stock = ft_strlen(*stock);
+	len_stock = 1;
 	free(*number);
 	*number = NULL;
 	if (len <= 0 )
@@ -63,10 +58,10 @@ void	ft_active_all_char(char	*conv, char **stock,char **number, int i)
 		return ;
 	}	
 	add = malloc(len + 1);
-	ft_active_all_1_char(conv, stock, len, i);
+	ft_active_all_1_pour(conv, stock, len, i);
 }
 
-void	ft_active_char(char *stock, char *conv)
+void	ft_active_pour(char *stock, char *conv)
 {
 	int		i;
 	char 	*number;
@@ -78,8 +73,8 @@ void	ft_active_char(char *stock, char *conv)
 	count = 0;
 	checkpoint = 0;
 	i--;
-	if (strchr(conv, '.') && conv[0] == '0')
-		conv = ft_delete_zero(conv);
+	if (strchr(conv, '.'))
+		conv = ft_delete_point(conv);
 	while (i >= 0)
 	{
 		if (ft_isdigit(conv[i]))
@@ -97,7 +92,7 @@ void	ft_active_char(char *stock, char *conv)
 				number[count] = '\0';
 				count = 0;	
 				number = ft_strrev(number);
-				ft_active_all_char(conv, &stock, &number, i);	
+				ft_active_all_pour(conv, &stock, &number, i);	
 			}
 		}
 		if (conv[i] == '-' && number)
@@ -108,19 +103,16 @@ void	ft_active_char(char *stock, char *conv)
 			number = ft_strrev(number);
 			ft_active_all_char(conv, &stock, &number, i);
 		}
-		if (conv[i] == '.')
-		{
-			checkpoint = 0;
-		}
-		if (conv[i] == '0' && number && i == 0)
+		if (conv[i] == '0' && number && i == 0 && conv[i + 1] != '-')
 		{
 			count = 0;
 			number = ft_strrev(number);
-			ft_active_all_char(conv, &stock, &number, i);
+			ft_active_all_pour(conv, &stock, &number, i);
 			checkpoint = 1;
 		}
 		i--;
-	}	
+	}
+		
 	if (checkpoint == 0)
 	{
 		ft_putchar(*stock);

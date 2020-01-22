@@ -48,3 +48,22 @@ char	*ft_delete_minus(char *stock)
 	}
 	return (result);
 }
+
+char	*ft_delete_point(char *conv)
+{
+	char *result;
+	int len;
+	int i;
+	int j;
+
+	j = 0;
+	i = 0;
+	len = ft_strlen(conv);
+	result = malloc(len);
+	while (conv[i] != '.')
+	{
+		result[j++] = conv[i++];
+	}
+	result[j] = '\0';
+	return result;
+}

@@ -146,7 +146,7 @@ void 	ft_active(char *stock, char *conv)
 				conv[count] = '\0';
 			}
 		}
-		if (conv[i] == '-' && number)
+		if (conv[i] == '-' && number) 
 		{
 			number[count] = '\0';
 			count = 0;

@@ -20,7 +20,11 @@
 
 
 int		ft_skip_minus(char *conv, int i);
+char	*ft_delete_point(char *conv);
+void	ft_active_all_1_pour(char *conv, char **stock, int len, int i);
+void	ft_active_all_pour(char	*conv, char **stock,char **number, int i);
 char	*ft_flags(char *str);
+void	ft_active_pour(char *stock, char *conv);
 char    *ft_char(char s);
 int    ft_check_zero(char *stock);
 int 	ft_printf(char *format, ...);

@@ -132,6 +132,12 @@ void	ft_active_string(char *stock, char *conv)
 			number = ft_strrev(number);
 			ft_active_all_string(conv, &stock, &number, i);
 		}
+		else if (!(ft_skip_minus(conv, i)) && conv[i] == '-')
+		{
+			free(number);
+			number = NULL;
+			count = 0;
+		}
 		if (conv[i] == '.' && conv[i + 1] != '-')
 		{
 			if (( number == NULL || atoi(number) == 0 )&& atoi(stock) == 0)
@@ -147,8 +153,7 @@ void	ft_active_string(char *stock, char *conv)
 			number = ft_strrev(number);
 			len_number = atoi(number);
 			len_stock = ft_strlen(stock);
-			ft_active_all_string(conv,&stock, &number, i);	
-			
+			ft_active_all_string(conv, &stock,&number, i);
 		}
 		if (conv[i] == '0' && number && i == 0)
 		{
