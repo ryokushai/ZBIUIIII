@@ -34,7 +34,7 @@ void	ft_active_all_1_string(char *conv, char **stock, int len, int i)
 	{
 		memset(add, '0', len);
 		add[len] = '\0';
-		*stock= ft_stock(add, *stock);
+		*stock = ft_stock(add, *stock);
 	}
 	
 	else if (ft_isdigit(conv[i]))
@@ -54,7 +54,6 @@ void	ft_active_all_1_string(char *conv, char **stock, int len, int i)
 	if (conv[i] == '.')
 	{
 		*stock = ft_trim(*stock, len);
-		add[len] = '\0';
 	}
 }
 
@@ -140,6 +139,7 @@ void	ft_active_string(char *stock, char *conv)
 		}
 		if (conv[i] == '.' && conv[i + 1] != '-')
 		{
+			
 			if (( number == NULL || atoi(number) == 0 )&& atoi(stock) == 0)
 			{
 				if (number == NULL)
@@ -149,20 +149,16 @@ void	ft_active_string(char *stock, char *conv)
 					number[1] = '\0';
 				}
 			}
+			number[count] = '\0';
 			count = 0;
 			number = ft_strrev(number);
 			len_number = atoi(number);
 			len_stock = ft_strlen(stock);
 			ft_active_all_string(conv, &stock,&number, i);
 		}
-		if (conv[i] == '0' && number && i == 0)
-		{
-			number[count] = '\0';
-			count = 0;
-			number = ft_strrev(number);
-			ft_active_all_string(conv, &stock, &number, i);
-		}	
 		i--;
 	}
 	ft_putstr_write(stock);
 }
+
+

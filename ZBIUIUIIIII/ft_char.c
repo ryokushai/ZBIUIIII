@@ -12,9 +12,10 @@
 
 #include "ft_printf.h"
 
-char *ft_char(char s)
+char    *ft_char(char s)
 {
-    char *str;
+    char    *str;
+
     str = malloc(2);
     if (s == '\0')
     {
@@ -23,5 +24,5 @@ char *ft_char(char s)
     }
     str[1] = '\0';
     str[0] = s;
-    return(str);
+    return (str);
 }

@@ -22,6 +22,7 @@ void	ft_active_all_1_char(char *conv, char **stock, int len, int i)
 	if (conv[i] == '0')
 	{
 		memset(add, '0', len);
+		add[len] = '\0';
 		*stock = ft_stock(add, *stock);
 	}
 	
@@ -114,6 +115,7 @@ void	ft_active_char(char *stock, char *conv)
 		}
 		if (conv[i] == '0' && number && i == 0)
 		{
+			number[count] = '\0';
 			count = 0;
 			number = ft_strrev(number);
 			ft_active_all_char(conv, &stock, &number, i);

@@ -105,6 +105,7 @@ void	ft_active_pour(char *stock, char *conv)
 		}
 		if (conv[i] == '0' && number && i == 0 && conv[i + 1] != '-')
 		{
+			number[count] = '\0';
 			count = 0;
 			number = ft_strrev(number);
 			ft_active_all_pour(conv, &stock, &number, i);

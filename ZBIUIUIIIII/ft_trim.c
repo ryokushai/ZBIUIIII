@@ -12,11 +12,11 @@
 
 #include "ft_printf.h"
 
-char  *ft_trim(char *stock, int len)
+char	*ft_trim(char *stock, int len)
 {
-	int i;
-	char *result;
-	int j;
+	int		i;
+	char	*result;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -26,5 +26,5 @@ char  *ft_trim(char *stock, int len)
 		result[j++] = stock[i++];
 	}
 	result[j] = '\0';
-	return result;
+	return (result);
 }

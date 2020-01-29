@@ -24,7 +24,7 @@ char	*ft_itohexa(unsigned int  n)
 
 	j = 0;
 	tab = "0123456789abcdef";
-	len = ft_lenght(n);
+	len = ft_lenght2(n);
 	f = n;
 	if (n == 0)
 	{
@@ -42,6 +42,7 @@ char	*ft_itohexa(unsigned int  n)
 		dest[j] = s;
 		j++;
 	}
+	dest[j] = '\0';
 	dest = ft_strrev(dest);
 	return (dest);
 }

@@ -42,6 +42,7 @@ char	*ft_itohexa2(unsigned int  n)
 		dest[j] = s;
 		j++;
 	}
+	dest[j] = '\0';
 	dest = ft_strrev(dest);
 	return (dest);
 }

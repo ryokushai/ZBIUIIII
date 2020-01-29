@@ -24,6 +24,7 @@ char	*ft_delete_point(char *conv);
 void	ft_active_all_1_pour(char *conv, char **stock, int len, int i);
 void	ft_active_all_pour(char	*conv, char **stock,char **number, int i);
 char	*ft_flags(char *str);
+int		ft_lenght2(unsigned  int n);
 void	ft_active_pour(char *stock, char *conv);
 char    *ft_char(char s);
 int    ft_check_zero(char *stock);

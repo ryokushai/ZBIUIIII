@@ -17,18 +17,21 @@ char *add;
 
 void	ft_active_all_1(char *conv, char **stock, int len, int i)
 {
+	add = malloc(len + 1);
 	if (conv[i] == '0')
 	{
 		if (*stock[0] == '-')
 		{
 			*stock = ft_delete_minus(*stock);
 			memset(add, '0', len );
+			add[len] = '\0';
 			add = ft_stock("-", add);
 			*stock = ft_stock(add, *stock);
 		}
 		else
 		{
 			memset(add, '0', len);
+			add[len] = '\0';
 			*stock = ft_stock(add, *stock);
 		}
 		/*
@@ -40,28 +43,33 @@ void	ft_active_all_1(char *conv, char **stock, int len, int i)
 	{
 		
 		memset(add, ' ', len);
+		add[len] = '\0';
 		*stock = ft_stock(add, *stock);
-		
-	
 	}
 	if (conv[i] == '-')
 	{
 		memset(add, ' ', len);
+		add[len] = '\0';
 		*stock = ft_stock(*stock, add);
 	
 	}
 	if (conv[i] == '.')
 	{
+		add = malloc(len + 2);
 		if (*stock[0] == '-')
 		{
+			len++;
 			*stock = ft_delete_minus(*stock);
-			memset(add, '0', len + 1);
+			memset(add, '0', len);
+			add[len] = '\0';
 			add = ft_stock("-", add);
 			*stock = ft_stock(add, *stock);
+
 		}
 		else
 		{
 			memset(add, '0', len);
+			add[len] = '\0';
 			*stock = ft_stock(add, *stock);
 		}
 	}
@@ -140,10 +148,10 @@ void 	ft_active(char *stock, char *conv)
 
 			if (i == 0 && conv[i] != '0')
 			{
+				number[count] = '\0';
 				count = 0;	
 				number = ft_strrev(number);
 				ft_active_all(conv, &stock, &number, i);	
-				conv[count] = '\0';
 			}
 		}
 		if (conv[i] == '-' && number) 
@@ -177,7 +185,7 @@ void 	ft_active(char *stock, char *conv)
 				{
 					if (number == NULL)
 					{
-						number = malloc(1);
+						number = malloc(2);
 						number[0] = '0';
 						number[1] = '\0';
 					}
@@ -186,6 +194,7 @@ void 	ft_active(char *stock, char *conv)
 				}
 				else if(number)
 				{
+					number[count] = '\0';
 					count = 0;
 					number = ft_strrev(number);
 					ft_active_all(conv, &stock, &number, i);

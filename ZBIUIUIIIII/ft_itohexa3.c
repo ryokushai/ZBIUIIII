@@ -43,6 +43,7 @@ char	*ft_itohexa3(unsigned long long  n)
 		dest[j] = s;
 		j++;
 	}
+	dest[j] = '\0';
 	dest = ft_strrev(dest);
 	return (dest);
 }

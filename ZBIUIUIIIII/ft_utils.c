@@ -56,6 +56,21 @@ char	*ft_strrev(char *str)
 	return (str);
 }
 
+int		ft_lenght2(unsigned  int n)
+{
+	unsigned int i;
+	unsigned int s;
+
+	s = n;
+	i = 0;
+	while (s != 0)
+	{
+		s = s / 10;
+		i++;
+	}
+	return i;
+}
+
 int		ft_lenght(unsigned long long  n)
 {
 	unsigned long long 	i;

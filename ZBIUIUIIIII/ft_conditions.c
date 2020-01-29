@@ -14,7 +14,7 @@
 
 char	*ft_conditions(char *str)
 {
-	char 	*tab;
+	char	*tab;
 	char	*result;
 	char	*ktr;
 	int		count;
@@ -24,9 +24,9 @@ char	*ft_conditions(char *str)
 	tab = "cspidu%xX";
 	while (*ktr)
 	{
-		if (!(strchr(tab,*ktr)))
+		if (!(strchr(tab, *ktr)))
 		{
-			count++;	
+			count++;
 		}
 		else
 		{
@@ -34,7 +34,6 @@ char	*ft_conditions(char *str)
 		}
 		ktr++;
 	}
-	result = ft_substr(str,0,count);
-	
-	return result;	
+	result = ft_substr(str, 0, count);
+	return (result);
 }

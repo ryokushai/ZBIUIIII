@@ -46,6 +46,7 @@ char	*ft_delete_minus(char *stock)
 	{
 		result[j++] = stock[i++];
 	}
+	result[j] = '\0';
 	return (result);
 }
 
