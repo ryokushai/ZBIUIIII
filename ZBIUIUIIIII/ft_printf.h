@@ -20,6 +20,10 @@
 
 
 int		ft_skip_minus(char *conv, int i);
+void	ft_condition_1(char *stock, char *conv, char *str, va_list arg);
+void	ft_condition_2(char *stock, char *conv, char *str, va_list arg);
+void	ft_free(char **stock, char **conv);
+void	ft_while(char **str, char **conv, int *num, int *count);
 char	*ft_delete_point(char *conv);
 void	ft_active_all_1_pour(char *conv, char **stock, int len, int i);
 void	ft_active_all_pour(char	*conv, char **stock,char **number, int i);
