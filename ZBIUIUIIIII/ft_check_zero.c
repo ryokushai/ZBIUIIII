@@ -12,29 +12,29 @@
 
 #include "ft_printf.h"
 
-int    ft_check_zero(char *stock)
+int		ft_check_zero(char *stock)
 {
-    int i;
+	int i;
 
-    i = 0;
-    if (stock[0] == '0' && stock[1] == 'x' && stock[2] == '0' && stock[3] == '\0')
-    {
-        return 2;
-    }           
-    while(stock[i])
-    {
-       if (ft_isdigit(stock[i]))
-       {
-           i++;
-       }
-       else
-       {
-           return 0;
-       }
-    }
-    if (atoi(stock) == 0)
-        return 1;
-    else
-        return 0;
-    return 0;
+	i = 0;
+	if (stock[0] == '0' && stock[1] == 'x' && stock[2] == '0' && stock[3] == '\0')
+	{
+		return (2);
+	}
+	while (stock[i])
+	{
+		if (ft_isdigit(stock[i]))
+		{
+			i++;
+		}
+		else
+		{
+			return (0);
+		}
+	}
+	if (atoi(stock) == 0)
+		return (1);
+	else
+		return (0);
+	return (0);
 }

@@ -1,4 +1,4 @@
-   /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_adress.c                                        :+:      :+:    :+:   */
@@ -17,10 +17,7 @@ char	*ft_adress(unsigned long long n)
 	char	*ptr;
 	char	*str;
 
-
 	str = ft_itohexa3(n);
-//	ptr = malloc(100);	
-	ptr = ft_stock("0x",str);
-	//ft_putstr(str);
-	return ptr;	
+	ptr = ft_stock("0x", str);
+	return (ptr);
 }
