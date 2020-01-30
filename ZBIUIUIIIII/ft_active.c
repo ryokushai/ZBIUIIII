@@ -13,7 +13,86 @@
 #include "ft_printf.h"
 
 char *add;
+int count;
 
+void	ft_while_part_three_int(char *conv, char **stock, char **number, int i)
+{
+			if (conv[i + 1] == '-' && **stock == '0')
+			{
+				**stock = '0';
+			}
+			else
+			{
+				if (*number)
+				{
+					(*number)[count] = '\0';
+				}
+				if (( *number == NULL || atoi(*number) == 0 ) && ft_check_zero(*stock))
+				{
+					if (*number == NULL)
+					{
+						*number = malloc(2);
+						(*number)[0] = '0';
+						(*number)[1] = '\0';
+					}
+					count = 0;
+					ft_active_all(conv, stock, number, i);
+				}
+				else if(*number)
+				{
+					(*number)[count] = '\0';
+					count = 0;
+					*number = ft_strrev(*number);
+					ft_active_all(conv, stock, number, i);
+				}
+			}
+}
+
+void	ft_while_part_two_int(char *conv, char **stock, char **number, int i)
+{
+		if (conv[i] == '-' && *number) 
+		{
+			(*number)[count] = '\0';
+			count = 0;
+			if(ft_skip_minus(conv,i))
+			{
+			*number = ft_strrev(*number);
+			ft_active_all(conv, stock, number, i);
+			}
+			else
+			{
+				*number = NULL;
+				free(*number);	
+			}
+		}
+}
+
+void	ft_while_part_one_int(char *conv, char **stock, char **number, int i)
+{
+		if (conv[i] == '0' && *number && i == 0)
+		{
+			(*number)[count] = '\0';			
+			count = 0;
+			*number = ft_strrev(*number);
+			ft_active_all(conv, stock, number, i);		
+		}	
+		else if (ft_isdigit(conv[i]))
+		{
+			if (*number == NULL)
+			{
+				*number = malloc(strlen(conv) + 1);
+			}
+			(*number)[count] = conv[i];	
+			count++;
+			if (i == 0 && conv[i] != '0')
+			{
+				(*number)[count] = '\0';
+				count = 0;	
+				*number = ft_strrev(*number);
+				ft_active_all(conv, stock, number, i);	
+			}
+		}
+}
 
 void	ft_active_all_1(char *conv, char **stock, int len, int i)
 {
@@ -34,10 +113,6 @@ void	ft_active_all_1(char *conv, char **stock, int len, int i)
 			add[len] = '\0';
 			*stock = ft_stock(add, *stock);
 		}
-		/*
-		memset(add, '0', len);
-		*stock = ft_stock(add, *stock);
-		*/
 	}
 	else if (ft_isdigit(conv[i]))
 	{
@@ -118,7 +193,7 @@ void 	ft_active(char *stock, char *conv)
 {
 	int		i;
 	char 	*number;
-	int		count;
+
 	char 	*xtr;
 	i = ft_strlen(conv);
 	number = NULL;
@@ -129,77 +204,11 @@ void 	ft_active(char *stock, char *conv)
 		conv = ft_delete_zero(conv);
 	while (i >= 0)
 	{
-		if (conv[i] == '0' && number && i == 0)
-		{
-		number[count] = '\0';			
-		count = 0;
-		number = ft_strrev(number);
-		//number = ft_delete_zero(number);
-		ft_active_all(conv, &stock, &number, i);		
-		}	
-		else if (ft_isdigit(conv[i]))
-		{
-			if (number == NULL)
-			{
-				number = malloc(strlen(conv) + 1);
-			}
-			number[count] = conv[i];	
-			count++;
-
-			if (i == 0 && conv[i] != '0')
-			{
-				number[count] = '\0';
-				count = 0;	
-				number = ft_strrev(number);
-				ft_active_all(conv, &stock, &number, i);	
-			}
-		}
-		if (conv[i] == '-' && number) 
-		{
-			number[count] = '\0';
-			count = 0;
-			if(ft_skip_minus(conv,i))
-			{
-			number = ft_strrev(number);
-			ft_active_all(conv, &stock, &number, i);
-			}
-			else
-			{
-				number = NULL;
-				free(number);	
-			}
-		}
+		ft_while_part_one_int(conv, &stock, &number, i);
+		ft_while_part_two_int(conv, &stock, &number,i);
 		if (conv[i] == '.')
 		{
-			if (conv[i + 1] == '-' && *stock == '0')
-			{
-				*stock = '0';
-			}
-			else
-			{
-				if (number)
-				{
-					number[count] = '\0';
-				}
-				if (( number == NULL || atoi(number) == 0 ) && ft_check_zero(stock))
-				{
-					if (number == NULL)
-					{
-						number = malloc(2);
-						number[0] = '0';
-						number[1] = '\0';
-					}
-					count = 0;
-					ft_active_all(conv, &stock, &number, i);
-				}
-				else if(number)
-				{
-					number[count] = '\0';
-					count = 0;
-					number = ft_strrev(number);
-					ft_active_all(conv, &stock, &number, i);
-				}
-			}
+			ft_while_part_three_int(conv, &stock, &number,i);
 		}
 		i--;
 	}
