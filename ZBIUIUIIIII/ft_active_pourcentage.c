@@ -12,118 +12,111 @@
 
 #include "ft_printf.h"
 
-char 	*add;
-int 	len_number;
-int		len_stock;
-int		checkpoint;
-int count;
+char	*g_add;
+int		g_checkpoint;
+int		g_count;
 
-void	ft_while_part_one_pourcentage(char *conv, char **stock, char **number, int i)
+void	ft_while_part_one_p(char *conv, char **stock, char **number, int i)
 {
-		if (ft_isdigit(conv[i]))
+	if (ft_isdigit(conv[i]))
+	{
+		g_checkpoint = 1;
+		if (*number == NULL)
 		{
-			checkpoint = 1;
-			if (*number == NULL)
-			{
-				*number = malloc(strlen(conv) + 1);
-			}
-			(*number)[count] = conv[i];	
-			count++;
-		
-			if (i == 0 && conv[i] != '0')
-			{
-				(*number)[count] = '\0';
-				count = 0;	
-				*number = ft_strrev(*number);
-				ft_active_all_pour(conv, stock, number, i);	
-			}
+			*number = malloc(strlen(conv) + 1);
 		}
-}
-
-void	ft_while_part_two_pourcentage(char *conv, char **stock, char **number, int i)
-{
-		if (conv[i] == '-' && *number)
+		(*number)[g_count] = conv[i];
+		g_count++;
+		if (i == 0 && conv[i] != '0')
 		{
-			(*number)[count] = '\0';
-			checkpoint = 1;
-			count = 0;
-			*number = ft_strrev(*number);
-			ft_active_all_char(conv, stock, number, i);
-		}
-		if (conv[i] == '0' && *number && i == 0 && conv[i + 1] != '-')
-		{
-			(*number)[count] = '\0';
-			count = 0;
+			(*number)[g_count] = '\0';
+			g_count = 0;
 			*number = ft_strrev(*number);
 			ft_active_all_pour(conv, stock, number, i);
-			checkpoint = 1;
 		}
+	}
+}
+
+void	ft_while_part_two_p(char *conv, char **stock, char **number, int i)
+{
+	if (conv[i] == '-' && *number)
+	{
+		(*number)[g_count] = '\0';
+		g_checkpoint = 1;
+		g_count = 0;
+		*number = ft_strrev(*number);
+		ft_active_all_char(conv, stock, number, i);
+	}
+	if (conv[i] == '0' && *number && i == 0 && conv[i + 1] != '-')
+	{
+		(*number)[g_count] = '\0';
+		g_count = 0;
+		*number = ft_strrev(*number);
+		ft_active_all_pour(conv, stock, number, i);
+		g_checkpoint = 1;
+	}
 }
 
 void	ft_active_all_1_pour(char *conv, char **stock, int len, int i)
 {
 	if (conv[i] == '0')
 	{
-		memset(add, '0', len);
-		add[len] = '\0';
-		ft_putstr_write(add);
+		memset(g_add, '0', len);
+		g_add[len] = '\0';
+		ft_putstr_write(g_add);
 		ft_putchar(**stock);
 	}
 	else if (ft_isdigit(conv[i]))
 	{
-		memset(add, ' ', len);
-		add[len] = '\0';
-		ft_putstr_write(add);
+		memset(g_add, ' ', len);
+		g_add[len] = '\0';
+		ft_putstr_write(g_add);
 		ft_putchar(**stock);
 	}
 	if (conv[i] == '-')
 	{
 		ft_putchar(**stock);
-		memset(add, ' ', len);
-		add[len] = '\0';
-		ft_putstr_write(add);
+		memset(g_add, ' ', len);
+		g_add[len] = '\0';
+		ft_putstr_write(g_add);
 		ft_putchar(**stock);
 	}
 }
 
-void	ft_active_all_pour(char	*conv, char **stock,char **number, int i)
+void	ft_active_all_pour(char *conv, char **stock, char **number, int i)
 {
 	int		len;
 
 	len = atoi(*number) - 1;
-    len_number = atoi(*number);
-	len_stock = 1;
 	free(*number);
 	*number = NULL;
-	if (len <= 0 )
+	if (len <= 0)
 	{
 		ft_putchar(**stock);
 		return ;
-	}	
-	add = malloc(len + 1);
+	}
+	g_add = malloc(len + 1);
 	ft_active_all_1_pour(conv, stock, len, i);
 }
 
 void	ft_active_pour(char *stock, char *conv)
 {
 	int		i;
-	char 	*number;
-	
+	char	*number;
 
-	
 	i = ft_strlen(conv);
 	number = NULL;
-	count = 0;
-	checkpoint = 0;
+	g_count = 0;
+	g_checkpoint = 0;
 	i--;
 	if (strchr(conv, '.'))
 		conv = ft_delete_point(conv);
 	while (i >= 0)
 	{
-		ft_while_part_one_pourcentage(conv, &stock, &number,i);
-		ft_while_part_two_pourcentage(conv, &stock, &number, i);
+		ft_while_part_one_p(conv, &stock, &number, i);
+		ft_while_part_two_p(conv, &stock, &number, i);
 		i--;
-	}	
-	if (checkpoint == 0)
+	}
+	if (g_checkpoint == 0)
 		ft_putchar(*stock);
-}	
+}
